@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">Get Cooking</string>
+
+    <string name="premium_recipe_label">100K+ Premium Recipe</string>
+    <string name="get_cooking_header">Get\nCooking</string>
+    <string name="app_description">Simple way to find Tasty Recipe</string>
+    <string name="start_cooking_label">Start Cooking</string>
+    <string name="sign_in_with">Or Sign In With</string>
+
+    <string name="unknown_exception_message">Failure, please try again.</string>
+    <string name="email_label">Email</string>
+    <string name="email_hint">Enter Email</string>
+    <string name="password_label">Password</string>
+    <string name="password_hint">Enter Password</string>
+    <string name="re_password_label">Confirm Password</string>
+    <string name="re_password_hint">Retype Password</string>
+    <string name="forgot_password_label">Forgot Password?</string>
+    <string name="sign_in_label">Sign In</string>
+    <string name="sign_up_label">Sign Up</string>
+    <string name="password_successfully_reset">Password Successfully Reset</string>
+    <string name="send_label">Send</string>
+    <string name="no_account_label">Don\'t have an account?\u0020</string>
+    <string name="login_header">Hello,</string>
+    <string name="login_header_part_two">Welcome Back!</string>
+    <string name="password_not_correct">Password is not correct.</string>
+    <string name="password_are_not_the_same">Passwords are not the same.</string>
+    <string name="email_not_correct">Email is not correct.</string>
+    <string name="registration_header">Create an account</string>
+    <string name="registration_description">Let us help you set up your account, it won\'t take long.</string>
+    <string name="already_have_an_account">Already a member?\u0020</string>
+    <string name="terms_not_accepted">Terms are not accepted.</string>
+    <string name="remind_password">Remind Password</string>
+
+    <!--    PROFILE SCREEN-->
+    <string name="profile_screen_title">Profile</string>
+    <string name="profile_screen_edit_profile">Edit Profile</string>
+    <string name="profile_screen_logout">Logout</string>
+</resources>
