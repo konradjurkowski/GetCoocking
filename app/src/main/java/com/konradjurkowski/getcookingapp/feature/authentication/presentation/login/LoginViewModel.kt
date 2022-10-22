@@ -21,45 +21,35 @@ class LoginViewModel @Inject constructor(
         private set
 
     fun onEmailChange(newValue: String) {
-        state = state.copy(
-            email = newValue
-        )
+        state = state.copy(email = newValue)
     }
 
     fun onPasswordChange(newValue: String) {
-        state = state.copy(
-            password = newValue
-        )
+        state = state.copy(password = newValue)
     }
 
     fun login(onFailure: (String) -> Unit) {
-        state = state.copy(isEmailValid = true, isPasswordValid = true)
         val isEmailValid = textValidator.validateEmail(state.email.trim())
         val isPasswordValid = textValidator.validatePassword(state.password.trim())
-        if (!isPasswordValid && !isEmailValid) {
-            state = state.copy(isEmailValid = false, isPasswordValid = false)
-            return
-        }
-        if (!isEmailValid) {
-            state = state.copy(isEmailValid = isEmailValid)
-            return
-        }
-        if (!isPasswordValid) {
-            state = state.copy(isPasswordValid = false)
-            return
-        }
-        state = state.copy(isLoading = true)
-        authenticationService.login(
-            email = state.email.trim(),
-            password = state.password.trim(),
-            onFailure = { failureMessage ->
-                state = state.copy(isLoading = false)
-                onFailure(failureMessage)
-            },
-            onSuccess = {
-                state = state.copy(isLoading = false)
-                internalNavigator.goToMainScreen()
-            }
+        state = state.copy(
+            isEmailValid = isEmailValid,
+            isPasswordValid = isPasswordValid
         )
+        // * make login api call only when inputs are valid
+        if (isEmailValid && isPasswordValid) {
+            state = state.copy(isLoading = true)
+            authenticationService.login(
+                email = state.email.trim(),
+                password = state.password.trim(),
+                onFailure = { failureMessage ->
+                    state = state.copy(isLoading = false)
+                    onFailure(failureMessage)
+                },
+                onSuccess = {
+                    state = state.copy(isLoading = false)
+                    internalNavigator.goToMainScreen()
+                }
+            )
+        }
     }
 }
