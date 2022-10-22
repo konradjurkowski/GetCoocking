@@ -19,28 +19,26 @@ class RemindPasswordViewModel @Inject constructor(
         private set
 
     fun onEmailChange(newValue: String) {
-        state = state.copy(
-            email = newValue
-        )
+        state = state.copy(email = newValue)
     }
 
     fun remindPassword(onSuccess: () -> Unit, onFailure: (String) -> Unit) {
-        state = state.copy(isEmailValid = true)
-        if (!textValidator.validateEmail(state.email)) {
-            state = state.copy(isEmailValid = false)
-            return
+        val isEmailValid = textValidator.validateEmail(state.email.trim())
+        state = state.copy(isEmailValid = isEmailValid)
+        // * make remindPassword api call only when inputs are valid
+        if (isEmailValid) {
+            state = state.copy(isLoading = true)
+            authenticationService.remindPassword(
+                email = state.email,
+                onSuccess = {
+                    state = state.copy(isLoading = false)
+                    onSuccess()
+                },
+                onFailure = {
+                    state = state.copy(isLoading = false)
+                    onFailure(it)
+                }
+            )
         }
-        state = state.copy(isLoading = true)
-        authenticationService.remindPassword(
-            email = state.email,
-            onSuccess = {
-                state = state.copy(isLoading = false)
-                onSuccess()
-            },
-            onFailure = {
-                state = state.copy(isLoading = false)
-                onFailure(it)
-            }
-        )
     }
 }
